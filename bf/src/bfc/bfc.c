@@ -330,6 +330,7 @@ size_t build_cfg(const char *source,
       break;
     case '<':
       incdecp(mod, builder, Decrement);
+        break;
     case '+':
       incdecv(mod, builder, Increment);
       break;
