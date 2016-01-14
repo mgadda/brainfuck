@@ -1,5 +1,6 @@
 build
 a.out
+*.bc
 # Created by https://www.gitignore.io/api/xcode
 
 ### Xcode ###
