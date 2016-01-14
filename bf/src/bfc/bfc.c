@@ -1,4 +1,5 @@
 /*
+http://www.muppetlabs.com/~breadbox/bf/
 
 A Brainfuck program has an implicit byte pointer, called "the pointer", which is
 free to move around within an array of 30000 bytes, initially all set to zero.
