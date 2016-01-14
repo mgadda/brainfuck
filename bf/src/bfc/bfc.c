@@ -135,7 +135,7 @@ int main(int argc, const char *argv[]) {
   LLVMWriteBitcodeToFile(mod, output_filename);
 
   char *cmd;
-  asprintf(&cmd, "clang %s", output_filename);
+  asprintf(&cmd, "clang ./build/libbfr.a %s", output_filename);
   system(cmd);
   free(cmd);
   
@@ -207,6 +207,11 @@ void setup_externals(LLVMModuleRef module) {
   LLVMTypeRef printf_param_types[] = { LLVMPointerType(LLVMInt8Type(), 0) };
   fnType = LLVMFunctionType(LLVMInt32Type(), printf_param_types, 1, true);
   LLVMAddFunction(module, "printf", fnType);
+  
+  LLVMTypeRef print_array[] = { LLVMPointerType(LLVMInt8Type(), 0), LLVMInt64Type() };
+  fnType = LLVMFunctionType(LLVMVoidType(), print_array, 2, false);
+  LLVMAddFunction(module, "print_array", fnType);
+  
 }
 
 void initp(LLVMModuleRef module, LLVMBuilderRef builder) {
@@ -354,6 +359,14 @@ size_t build_cfg(const char *source,
         printf("Unknown instruction: '%c'", source[i]);
         break;
     }
+    
+    // Print memory
+//    LLVMValueRef printArrayFn = LLVMGetNamedFunction(mod, "print_array");
+//    LLVMValueRef memoryPtrPtr = LLVMGetNamedGlobal(mod, "memory");
+//    LLVMValueRef indices[] = { LLVMConstInt(LLVMInt8Type(), 0, false), LLVMConstInt(LLVMInt8Type(), 0, false) };
+//    LLVMValueRef gep = LLVMBuildInBoundsGEP(builder, memoryPtrPtr, indices, 2, "");
+//    LLVMValueRef printArrayArgs[] = { gep, LLVMConstInt(LLVMInt64Type(), 25, false) };
+//    LLVMBuildCall(builder, printArrayFn, printArrayArgs, 2, "");
   }
   return strlen(source); // we processed the entire buffer
 }
@@ -363,6 +376,7 @@ void print_memory(LLVMModuleRef mod, LLVMBuilderRef builder) {
   LLVMValueRef memoryPtrPtr = LLVMGetNamedGlobal(mod, "memory");
   LLVMValueRef indices[] = { LLVMConstInt(LLVMInt8Type(), 0, false), LLVMConstInt(LLVMInt8Type(), 0, false) };
   LLVMValueRef gep = LLVMBuildInBoundsGEP(builder, memoryPtrPtr, indices, 2, "");
-  LLVMValueRef args[] = { gep  };
-  LLVMBuildCall(builder, printfFn, args, 1, "");
+  LLVMValueRef format_str = LLVMConstString("%02x", 4, false);
+  LLVMValueRef args[] = { format_str, gep };
+  LLVMBuildCall(builder, printfFn, args, 2, "");
 }
