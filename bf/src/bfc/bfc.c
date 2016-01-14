@@ -54,22 +54,52 @@ enum Direction {
   Decrement = -1
 };
 
+// Look for the last period in filename, replace everything after with the
+// contents of ext[]. Store the new string in the already allocated result[].
+// result_length specifies the size of result[]. This length will never be
+// exceeded.
 void replace_ext(const char filename[],
                  const char ext[],
                  char result[],
                  size_t result_length);
-char *load_file(FILE *file);
+
+// Allocate 1k buffer and attempt to read null-terminated source into it.
+// You are responsible for freeing this memory later.
+char *load_file(const char *filename);
+
+// Declare and initialize global memory
 void setup_globals(LLVMModuleRef module);
+
+// Declare external functions such as those defined in libc or libbfr
 void setup_externals(LLVMModuleRef module);
+
+// Emit instructions to builder which increment or decrement the value of the
+// global pointer p. The direction is determined by the value of dir
 void incdecp(LLVMModuleRef module, LLVMBuilderRef builder, Direction dir);
+
+// Emit instructions to builder which increment or decrement the value pointed
+// to by global pointer p. The direction is determined by the value of dir.
 void incdecv(LLVMModuleRef module, LLVMBuilderRef builder, Direction dir);
+
+// Emit instructions to builder to invoke putchar with the value pointed to
+// by the global pointer p.
 void putp(LLVMModuleRef module, LLVMBuilderRef builder);
+
+// Emit instructions to builder to invoke getchar and store the result at the
+// address pointed to by the global pointer p.
 void getp(LLVMModuleRef module, LLVMBuilderRef builder);
+
+// This is the meat. Iterate over each brainfuck instruction and emit
+// appropriate instructions to builder.
 size_t build_cfg(const char *source,
                LLVMModuleRef mod,
                LLVMBuilderRef builder,
                LLVMValueRef main);
-void initp(LLVMModuleRef module, LLVMBuilderRef builder);
+
+// For debugging, emit instructions to builder which invoke printf and pass
+// the pointer referenced by the global variable memory as an argument.
+// The result is the contents of memory are sent to stdout up to the first
+// 0 (since, of course, C strings are null terminated).
 void print_memory(LLVMModuleRef mod, LLVMBuilderRef builder);
 
 int main(int argc, const char *argv[]) {
@@ -78,13 +108,7 @@ int main(int argc, const char *argv[]) {
     exit(0);
   }
 
-  FILE *file = fopen(argv[1], "r");
-  if (NULL == file) {
-    perror(argv[1]);
-    return -1;
-  }
-  
-  char *source = load_file(file);
+  char *source = load_file(argv[1]);
 
   // emit llvm blocks here
   LLVMModuleRef mod = LLVMModuleCreateWithName("bf");
@@ -105,10 +129,6 @@ int main(int argc, const char *argv[]) {
 
   LLVMBuilderRef builder = LLVMCreateBuilder();
   LLVMPositionBuilderAtEnd(builder, entry);
-  
-  // Initialize p which points to NULL.
-  // It should point to memory
-  initp(mod, builder);
   
   build_cfg(source, mod, builder, main);
   
@@ -143,10 +163,6 @@ int main(int argc, const char *argv[]) {
   LLVMDisposeModule(mod);
   
   free(source);
-  fclose(file);
-  // read file from argv[1]
-  // map each character to x86 instructions
-  // write to argv[2]
   return 0;
 }
 
@@ -162,8 +178,13 @@ void replace_ext(const char filename[], const char ext[], char result[], size_t 
   free(mutable_filename);
 }
 
-// Create 1k buffer and read null-terminated source into it
-char *load_file(FILE *file) {
+char *load_file(const char *filename) {
+  FILE *file = fopen(filename, "r");
+  if (NULL == file) {
+    perror(filename);
+    exit(-1);
+  }
+
   char *source = (char*)calloc(1024, 1);
   size_t bytes_read = fread(source, 1, 1024 - 1, file);
   source[bytes_read] = 0;
@@ -213,10 +234,6 @@ void setup_externals(LLVMModuleRef module) {
   fnType = LLVMFunctionType(LLVMVoidType(), print_array, 2, false);
   LLVMAddFunction(module, "print_array", fnType);
   
-}
-
-void initp(LLVMModuleRef module, LLVMBuilderRef builder) {
-
 }
 
 // Increment %p
