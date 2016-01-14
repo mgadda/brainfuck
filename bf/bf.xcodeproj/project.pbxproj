@@ -1,0 +1,493 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7D5141E11C446CE80014AA99 /* bfi.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D5141DF1C446CE80014AA99 /* bfi.c */; };
+		7D5141FC1C44A6550014AA99 /* bfc.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D5141DE1C446CE80014AA99 /* bfc.c */; };
+		7D5141FE1C44A8910014AA99 /* libLLVMCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5141FD1C44A8910014AA99 /* libLLVMCore.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7D5141D21C446CB70014AA99 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		7D5141F31C44A6290014AA99 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7D5141D41C446CB70014AA99 /* bfi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bfi; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D5141DE1C446CE80014AA99 /* bfc.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = bfc.c; path = /Users/mgadda/workspace/brainfuck/bf/src/bfc/bfc.c; sourceTree = "<absolute>"; };
+		7D5141DF1C446CE80014AA99 /* bfi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bfi.c; path = src/bfi/bfi.c; sourceTree = "<group>"; };
+		7D5141F51C44A6290014AA99 /* bfc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bfc; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D5141FD1C44A8910014AA99 /* libLLVMCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLLVMCore.a; path = /opt/twitter/Cellar/llvm/3.5.1/lib/libLLVMCore.a; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7D5141D11C446CB70014AA99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D5141F21C44A6290014AA99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D5141FE1C44A8910014AA99 /* libLLVMCore.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7D5141CB1C446CB70014AA99 = {
+			isa = PBXGroup;
+			children = (
+				7D5142CB1C44A8EA0014AA99 /* Libraries */,
+				7D5141D61C446CB70014AA99 /* bfi */,
+				7D5141E71C446D490014AA99 /* bfc */,
+				7D5141F61C44A6290014AA99 /* bfcpp */,
+				7D5141D51C446CB70014AA99 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7D5141D51C446CB70014AA99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D5141D41C446CB70014AA99 /* bfi */,
+				7D5141F51C44A6290014AA99 /* bfc */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7D5141D61C446CB70014AA99 /* bfi */ = {
+			isa = PBXGroup;
+			children = (
+				7D5141DF1C446CE80014AA99 /* bfi.c */,
+			);
+			name = bfi;
+			path = bf;
+			sourceTree = "<group>";
+		};
+		7D5141E71C446D490014AA99 /* bfc */ = {
+			isa = PBXGroup;
+			children = (
+				7D5141DE1C446CE80014AA99 /* bfc.c */,
+			);
+			path = bfc;
+			sourceTree = "<group>";
+		};
+		7D5141F61C44A6290014AA99 /* bfcpp */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = bfcpp;
+			sourceTree = "<group>";
+		};
+		7D5142CB1C44A8EA0014AA99 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				7D5141FD1C44A8910014AA99 /* libLLVMCore.a */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7D5141D31C446CB70014AA99 /* bfi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D5141DB1C446CB70014AA99 /* Build configuration list for PBXNativeTarget "bfi" */;
+			buildPhases = (
+				7D5141D01C446CB70014AA99 /* Sources */,
+				7D5141D11C446CB70014AA99 /* Frameworks */,
+				7D5141D21C446CB70014AA99 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bfi;
+			productName = bf;
+			productReference = 7D5141D41C446CB70014AA99 /* bfi */;
+			productType = "com.apple.product-type.tool";
+		};
+		7D5141F41C44A6290014AA99 /* bfc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D5141F91C44A6290014AA99 /* Build configuration list for PBXNativeTarget "bfc" */;
+			buildPhases = (
+				7D5141F11C44A6290014AA99 /* Sources */,
+				7D5141F21C44A6290014AA99 /* Frameworks */,
+				7D5141F31C44A6290014AA99 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bfc;
+			productName = bfcpp;
+			productReference = 7D5141F51C44A6290014AA99 /* bfc */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7D5141CC1C446CB70014AA99 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Matt Gadda";
+				TargetAttributes = {
+					7D5141D31C446CB70014AA99 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					7D5141F41C44A6290014AA99 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 7D5141CF1C446CB70014AA99 /* Build configuration list for PBXProject "bf" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7D5141CB1C446CB70014AA99;
+			productRefGroup = 7D5141D51C446CB70014AA99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7D5141D31C446CB70014AA99 /* bfi */,
+				7D5141F41C44A6290014AA99 /* bfc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7D5141D01C446CB70014AA99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D5141E11C446CE80014AA99 /* bfi.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D5141F11C44A6290014AA99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D5141FC1C44A6550014AA99 /* bfc.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7D5141D91C446CB70014AA99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		7D5141DA1C446CB70014AA99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7D5141DC1C446CB70014AA99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = bfi;
+			};
+			name = Debug;
+		};
+		7D5141DD1C446CB70014AA99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = bfi;
+			};
+			name = Release;
+		};
+		7D5141FA1C44A6290014AA99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = /opt/twitter/opt/llvm/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/twitter/Cellar/llvm/3.5.1/lib,
+				);
+				OTHER_CFLAGS = (
+					"-I/opt/twitter/Cellar/llvm/3.5.1/include",
+					"-fPIC",
+					"-Wall",
+					"-W",
+					"-Wno-unused-parameter",
+					"-Wwrite-strings",
+					"-Wmissing-field-initializers",
+					"-pedantic",
+					"-Wno-long-long",
+					"-Wcovered-switch-default",
+					"-D__STDC_CONSTANT_MACROS",
+					"-D__STDC_FORMAT_MACROS",
+					"-D__STDC_LIMIT_MACROS",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-I/opt/twitter/Cellar/llvm/3.5.1/include",
+					"-fPIC",
+					"-fvisibility-inlines-hidden",
+					"-Wall",
+					"-W",
+					"-Wno-unused-parameter",
+					"-Wwrite-strings",
+					"-Wmissing-field-initializers",
+					"-pedantic",
+					"-Wno-long-long",
+					"-Wcovered-switch-default",
+					"-Wnon-virtual-dtor",
+					"-std=c++11",
+					"-D__STDC_CONSTANT_MACROS",
+					"-D__STDC_FORMAT_MACROS",
+					"-D__STDC_LIMIT_MACROS",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/twitter/Cellar/llvm/3.5.1/lib",
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names\n-lLLVMBitWriter",
+					"-lLLVMX86Disassembler",
+					"-lLLVMX86AsmParser",
+					"-lLLVMX86CodeGen",
+					"-lLLVMSelectionDAG",
+					"-lLLVMAsmPrinter",
+					"-lLLVMX86Desc",
+					"-lLLVMObject",
+					"-lLLVMMCParser",
+					"-lLLVMBitReader",
+					"-lLLVMX86Info",
+					"-lLLVMX86AsmPrinter",
+					"-lLLVMX86Utils",
+					"-lLLVMInterpreter",
+					"-lLLVMJIT",
+					"-lLLVMCodeGen",
+					"-lLLVMScalarOpts",
+					"-lLLVMInstCombine",
+					"-lLLVMTransformUtils",
+					"-lLLVMipa",
+					"-lLLVMAnalysis",
+					"-lLLVMTarget",
+					"-lLLVMExecutionEngine",
+					"-lLLVMMC",
+					"-lLLVMCore",
+					"-lLLVMSupport\n-lcurses",
+					"-lpthread",
+					"-lz
+",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7D5141FB1C44A6290014AA99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = /opt/twitter/opt/llvm/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/twitter/Cellar/llvm/3.5.1/lib,
+				);
+				OTHER_CFLAGS = (
+					"-I/opt/twitter/Cellar/llvm/3.5.1/include",
+					"-fPIC",
+					"-Wall",
+					"-W",
+					"-Wno-unused-parameter",
+					"-Wwrite-strings",
+					"-Wmissing-field-initializers",
+					"-pedantic",
+					"-Wno-long-long",
+					"-Wcovered-switch-default",
+					"-D__STDC_CONSTANT_MACROS",
+					"-D__STDC_FORMAT_MACROS",
+					"-D__STDC_LIMIT_MACROS",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-I/opt/twitter/Cellar/llvm/3.5.1/include",
+					"-fPIC",
+					"-fvisibility-inlines-hidden",
+					"-Wall",
+					"-W",
+					"-Wno-unused-parameter",
+					"-Wwrite-strings",
+					"-Wmissing-field-initializers",
+					"-pedantic",
+					"-Wno-long-long",
+					"-Wcovered-switch-default",
+					"-Wnon-virtual-dtor",
+					"-std=c++11",
+					"-D__STDC_CONSTANT_MACROS",
+					"-D__STDC_FORMAT_MACROS",
+					"-D__STDC_LIMIT_MACROS",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/twitter/Cellar/llvm/3.5.1/lib",
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names\n-lLLVMBitWriter",
+					"-lLLVMX86Disassembler",
+					"-lLLVMX86AsmParser",
+					"-lLLVMX86CodeGen",
+					"-lLLVMSelectionDAG",
+					"-lLLVMAsmPrinter",
+					"-lLLVMX86Desc",
+					"-lLLVMObject",
+					"-lLLVMMCParser",
+					"-lLLVMBitReader",
+					"-lLLVMX86Info",
+					"-lLLVMX86AsmPrinter",
+					"-lLLVMX86Utils",
+					"-lLLVMInterpreter",
+					"-lLLVMJIT",
+					"-lLLVMCodeGen",
+					"-lLLVMScalarOpts",
+					"-lLLVMInstCombine",
+					"-lLLVMTransformUtils",
+					"-lLLVMipa",
+					"-lLLVMAnalysis",
+					"-lLLVMTarget",
+					"-lLLVMExecutionEngine",
+					"-lLLVMMC",
+					"-lLLVMCore",
+					"-lLLVMSupport\n-lcurses",
+					"-lpthread",
+					"-lz
+",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7D5141CF1C446CB70014AA99 /* Build configuration list for PBXProject "bf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D5141D91C446CB70014AA99 /* Debug */,
+				7D5141DA1C446CB70014AA99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D5141DB1C446CB70014AA99 /* Build configuration list for PBXNativeTarget "bfi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D5141DC1C446CB70014AA99 /* Debug */,
+				7D5141DD1C446CB70014AA99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D5141F91C44A6290014AA99 /* Build configuration list for PBXNativeTarget "bfc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D5141FA1C44A6290014AA99 /* Debug */,
+				7D5141FB1C44A6290014AA99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7D5141CC1C446CB70014AA99 /* Project object */;
+}
