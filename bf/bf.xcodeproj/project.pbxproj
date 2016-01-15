@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D44825E1C489E1C00A09810 /* libLLVMCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D44825D1C489E1C00A09810 /* libLLVMCore.a */; };
 		7D5141E11C446CE80014AA99 /* bfi.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D5141DF1C446CE80014AA99 /* bfi.c */; };
 		7D5141FC1C44A6550014AA99 /* bfc.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D5141DE1C446CE80014AA99 /* bfc.c */; };
-		7D5141FE1C44A8910014AA99 /* libLLVMCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5141FD1C44A8910014AA99 /* libLLVMCore.a */; };
 		7DBFC78A1C4848AA00EF173A /* runtime.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DBFC7881C4848AA00EF173A /* runtime.c */; };
 		7DBFC78B1C4848AA00EF173A /* runtime.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DBFC7891C4848AA00EF173A /* runtime.h */; };
 		7DBFC78C1C484C6E00EF173A /* libruntime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DBFC7831C48486500EF173A /* libruntime.a */; };
@@ -37,11 +37,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7D44825D1C489E1C00A09810 /* libLLVMCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLLVMCore.a; path = ../../../../../usr/local/Cellar/llvm/3.6.2/lib/libLLVMCore.a; sourceTree = "<group>"; };
 		7D5141D41C446CB70014AA99 /* bfi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bfi; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D5141DE1C446CE80014AA99 /* bfc.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = bfc.c; path = /Users/mgadda/workspace/brainfuck/bf/src/bfc/bfc.c; sourceTree = "<absolute>"; };
 		7D5141DF1C446CE80014AA99 /* bfi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bfi.c; path = src/bfi/bfi.c; sourceTree = "<group>"; };
 		7D5141F51C44A6290014AA99 /* bfc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bfc; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D5141FD1C44A8910014AA99 /* libLLVMCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLLVMCore.a; path = /opt/twitter/Cellar/llvm/3.5.1/lib/libLLVMCore.a; sourceTree = "<absolute>"; };
 		7DBFC7831C48486500EF173A /* libruntime.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libruntime.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DBFC7881C4848AA00EF173A /* runtime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = runtime.c; path = src/runtime/runtime.c; sourceTree = "<group>"; };
 		7DBFC7891C4848AA00EF173A /* runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = runtime.h; path = src/runtime/runtime.h; sourceTree = "<group>"; };
@@ -59,8 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D44825E1C489E1C00A09810 /* libLLVMCore.a in Frameworks */,
 				7DBFC78C1C484C6E00EF173A /* libruntime.a in Frameworks */,
-				7D5141FE1C44A8910014AA99 /* libLLVMCore.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +77,7 @@
 		7D5141CB1C446CB70014AA99 = {
 			isa = PBXGroup;
 			children = (
+				7D44825D1C489E1C00A09810 /* libLLVMCore.a */,
 				7DBFC7871C48489100EF173A /* runtime */,
 				7D5142CB1C44A8EA0014AA99 /* Libraries */,
 				7D5141D61C446CB70014AA99 /* bfi */,
@@ -115,7 +116,6 @@
 		7D5142CB1C44A8EA0014AA99 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				7D5141FD1C44A8910014AA99 /* libLLVMCore.a */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -359,13 +359,12 @@
 		7D5141FA1C44A6290014AA99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /opt/twitter/opt/llvm/include;
+				HEADER_SEARCH_PATHS = /usr/local/opt/llvm/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/twitter/Cellar/llvm/3.5.1/lib,
+					/usr/local/opt/llvm/lib,
 				);
 				OTHER_CFLAGS = (
-					"-I/opt/twitter/Cellar/llvm/3.5.1/include",
 					"-fPIC",
 					"-Wall",
 					"-W",
@@ -381,7 +380,6 @@
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
-					"-I/opt/twitter/Cellar/llvm/3.5.1/include",
 					"-fPIC",
 					"-fvisibility-inlines-hidden",
 					"-Wall",
@@ -399,37 +397,40 @@
 					"-D__STDC_LIMIT_MACROS",
 				);
 				OTHER_LDFLAGS = (
-					"-L/opt/twitter/Cellar/llvm/3.5.1/lib",
 					"-Wl,-search_paths_first",
-					"-Wl,-headerpad_max_install_names\n-lLLVMBitWriter",
+					"-Wl,-headerpad_max_install_names",
+					"-lLLVMBitWriter",
 					"-lLLVMX86Disassembler",
 					"-lLLVMX86AsmParser",
 					"-lLLVMX86CodeGen",
 					"-lLLVMSelectionDAG",
 					"-lLLVMAsmPrinter",
 					"-lLLVMX86Desc",
-					"-lLLVMObject",
-					"-lLLVMMCParser",
-					"-lLLVMBitReader",
+					"-lLLVMMCDisassembler",
 					"-lLLVMX86Info",
 					"-lLLVMX86AsmPrinter",
 					"-lLLVMX86Utils",
 					"-lLLVMInterpreter",
-					"-lLLVMJIT",
+					"-lLLVMExecutionEngine",
+					"-lLLVMRuntimeDyld",
 					"-lLLVMCodeGen",
 					"-lLLVMScalarOpts",
+					"-lLLVMProfileData",
+					"-lLLVMObject",
+					"-lLLVMMCParser",
+					"-lLLVMBitReader",
 					"-lLLVMInstCombine",
 					"-lLLVMTransformUtils",
 					"-lLLVMipa",
 					"-lLLVMAnalysis",
 					"-lLLVMTarget",
-					"-lLLVMExecutionEngine",
 					"-lLLVMMC",
 					"-lLLVMCore",
-					"-lLLVMSupport\n-lcurses",
+					"-lLLVMSupport",
+					"-lcurses",
 					"-lpthread",
-					"-lz
-",
+					"-lz",
+					"-lm",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -438,13 +439,12 @@
 		7D5141FB1C44A6290014AA99 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /opt/twitter/opt/llvm/include;
+				HEADER_SEARCH_PATHS = /usr/local/opt/llvm/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/twitter/Cellar/llvm/3.5.1/lib,
+					/usr/local/opt/llvm/lib,
 				);
 				OTHER_CFLAGS = (
-					"-I/opt/twitter/Cellar/llvm/3.5.1/include",
 					"-fPIC",
 					"-Wall",
 					"-W",
@@ -460,7 +460,6 @@
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
-					"-I/opt/twitter/Cellar/llvm/3.5.1/include",
 					"-fPIC",
 					"-fvisibility-inlines-hidden",
 					"-Wall",
@@ -478,37 +477,40 @@
 					"-D__STDC_LIMIT_MACROS",
 				);
 				OTHER_LDFLAGS = (
-					"-L/opt/twitter/Cellar/llvm/3.5.1/lib",
 					"-Wl,-search_paths_first",
-					"-Wl,-headerpad_max_install_names\n-lLLVMBitWriter",
+					"-Wl,-headerpad_max_install_names",
+					"-lLLVMBitWriter",
 					"-lLLVMX86Disassembler",
 					"-lLLVMX86AsmParser",
 					"-lLLVMX86CodeGen",
 					"-lLLVMSelectionDAG",
 					"-lLLVMAsmPrinter",
 					"-lLLVMX86Desc",
-					"-lLLVMObject",
-					"-lLLVMMCParser",
-					"-lLLVMBitReader",
+					"-lLLVMMCDisassembler",
 					"-lLLVMX86Info",
 					"-lLLVMX86AsmPrinter",
 					"-lLLVMX86Utils",
 					"-lLLVMInterpreter",
-					"-lLLVMJIT",
+					"-lLLVMExecutionEngine",
+					"-lLLVMRuntimeDyld",
 					"-lLLVMCodeGen",
 					"-lLLVMScalarOpts",
+					"-lLLVMProfileData",
+					"-lLLVMObject",
+					"-lLLVMMCParser",
+					"-lLLVMBitReader",
 					"-lLLVMInstCombine",
 					"-lLLVMTransformUtils",
 					"-lLLVMipa",
 					"-lLLVMAnalysis",
 					"-lLLVMTarget",
-					"-lLLVMExecutionEngine",
 					"-lLLVMMC",
 					"-lLLVMCore",
-					"-lLLVMSupport\n-lcurses",
+					"-lLLVMSupport",
+					"-lcurses",
 					"-lpthread",
-					"-lz
-",
+					"-lz",
+					"-lm",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -567,6 +569,7 @@
 				7DBFC7861C48486500EF173A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
