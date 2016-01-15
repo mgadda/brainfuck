@@ -108,16 +108,16 @@ int main(int argc, const char *argv[]) {
 
   // emit llvm blocks here
   LLVMModuleRef mod = LLVMModuleCreateWithName("bf");
-  
+
   setup_globals(mod);
   setup_externals(mod);
-  
+
   // int main() {
   LLVMTypeRef main_param_types[] = {
     LLVMInt32Type(), // int argc
     LLVMPointerType(LLVMPointerType(LLVMInt8Type(), 0), 0) // char *argv[]
   };
-  
+
   LLVMTypeRef ret_type = LLVMFunctionType(LLVMInt32Type(), main_param_types, 2, false);
   LLVMValueRef main = LLVMAddFunction(mod, "main", ret_type);
 
@@ -125,11 +125,11 @@ int main(int argc, const char *argv[]) {
 
   LLVMBuilderRef builder = LLVMCreateBuilder();
   LLVMPositionBuilderAtEnd(builder, entry);
-  
+
   build_cfg(source, mod, builder, main);
-  
+
   //print_memory(mod, builder);
-  
+
   //   return 0;
   LLVMBuildRet(builder, LLVMConstInt(LLVMInt32Type(), 0, false));
   // }
@@ -138,26 +138,26 @@ int main(int argc, const char *argv[]) {
   char *error = NULL;
   LLVMVerifyModule(mod, LLVMAbortProcessAction, &error);
   LLVMDisposeMessage(error);
-  
+
   if (argc >= 3 && strcmp(argv[2], "--emit-llvm") == 0) {
     // write output to disk
     LLVMDumpModule(mod);
   }
-  
+
   // foo.bf -> foo.bc
   size_t max_filename_length = strlen(argv[1]) + 2;
   char output_filename[max_filename_length];
   replace_ext(argv[1], "bc", output_filename, max_filename_length);
-  
+
   LLVMWriteBitcodeToFile(mod, output_filename);
 
   char *cmd;
   asprintf(&cmd, "clang ./build/libbfr.a %s", output_filename);
   system(cmd);
   free(cmd);
-  
+
   LLVMDisposeModule(mod);
-  
+
   free(source);
   return 0;
 }
@@ -201,12 +201,12 @@ void setup_globals(LLVMModuleRef module) {
   LLVMValueRef p = LLVMAddGlobal(module, LLVMPointerType(LLVMInt8Type(), 0), "p");
   // p = NULL;
   //LLVMSetInitializer(p, LLVMConstNull(LLVMPointerType(LLVMInt8Type(), 0)));
-  
+
   LLVMValueRef indices[] = {
     LLVMConstInt(LLVMInt8Type(), 0, false),
     LLVMConstInt(LLVMInt8Type(), 0, false)
   };
-  
+
   // p = memory;
   LLVMSetInitializer(p, LLVMConstInBoundsGEP(memory, indices, 2));
 }
@@ -220,27 +220,27 @@ void setup_externals(LLVMModuleRef module) {
   // int getchar(void)
   fnType = LLVMFunctionType(LLVMInt32Type(), {}, 0, false);
   LLVMAddFunction(module, "getchar", fnType);
-  
+
   // int printf(const char * restrict format, ...);
   LLVMTypeRef printf_param_types[] = { LLVMPointerType(LLVMInt8Type(), 0) };
   fnType = LLVMFunctionType(LLVMInt32Type(), printf_param_types, 1, true);
   LLVMAddFunction(module, "printf", fnType);
-  
+
   LLVMTypeRef print_array[] = { LLVMPointerType(LLVMInt8Type(), 0), LLVMInt64Type() };
   fnType = LLVMFunctionType(LLVMVoidType(), print_array, 2, false);
   LLVMAddFunction(module, "print_array", fnType);
-  
+
 }
 
 void incdecp(LLVMModuleRef module, LLVMBuilderRef builder, Direction dir) {
   LLVMValueRef pPtrPtrValue = LLVMGetNamedGlobal(module, "p");
-  
+
   LLVMValueRef i1 = LLVMBuildLoad(builder, pPtrPtrValue, "");
-  
+
   // q = p +/- 1;
   LLVMValueRef indices[] = { LLVMConstInt(LLVMInt32Type(), dir, false) };
   LLVMValueRef i2 = LLVMBuildInBoundsGEP(builder, i1, indices, 1, "");
-  
+
   // p = q
   LLVMBuildStore(builder, i2, pPtrPtrValue);
 }
@@ -248,28 +248,28 @@ void incdecp(LLVMModuleRef module, LLVMBuilderRef builder, Direction dir) {
 void incdecv(LLVMModuleRef module, LLVMBuilderRef builder, Direction dir) {
 
   LLVMValueRef pPtrPtrValue = LLVMGetNamedGlobal(module, "p");
-  
+
   LLVMValueRef pPtrValue = LLVMBuildLoad(builder, pPtrPtrValue, "");
   LLVMValueRef pValue = LLVMBuildLoad(builder, pPtrValue, "");
-  
+
   // q = *p + 1;
   LLVMValueRef result = LLVMBuildAdd(builder, pValue, LLVMConstInt(LLVMInt8Type(), dir, false), "");
-  
+
   // *p = q
   LLVMBuildStore(builder, result, pPtrValue);
 }
 
 void putp(LLVMModuleRef module, LLVMBuilderRef builder) {
   LLVMValueRef pPtrPtrValue = LLVMGetNamedGlobal(module, "p");
-  
+
   LLVMValueRef pPtrValue = LLVMBuildLoad(builder, pPtrPtrValue, "");
   LLVMValueRef pValue = LLVMBuildLoad(builder, pPtrValue, "");
-  
+
   LLVMValueRef pIntValue = LLVMBuildZExt(builder, pValue, LLVMInt32Type(), "");
-  
+
   // Get and/or declare int putchar(int)
   LLVMValueRef putcharFn = LLVMGetNamedFunction(module, "putchar");
-  
+
   LLVMValueRef args[] = { pIntValue };
   LLVMBuildCall(builder, putcharFn, args, 1, "");
 }
@@ -277,14 +277,14 @@ void putp(LLVMModuleRef module, LLVMBuilderRef builder) {
 void getp(LLVMModuleRef module, LLVMBuilderRef builder) {
   // Get and/or declare int getchar(void)
   LLVMValueRef getcharFn = LLVMGetNamedFunction(module, "getchar");
-  
+
   // getchar()
   LLVMValueRef i32Result = LLVMBuildCall(builder, getcharFn, {}, 0, "");
   LLVMValueRef i8Result = LLVMBuildTrunc(builder, i32Result, LLVMInt8Type(), "");
-  
+
   LLVMValueRef pPtrPtrValue = LLVMGetNamedGlobal(module, "p");
   LLVMValueRef pPtrValue = LLVMBuildLoad(builder, pPtrPtrValue, "");
-  
+
   LLVMBuildStore(builder, i8Result, pPtrValue);
 }
 
@@ -292,15 +292,15 @@ size_t whilep(const char *source,
             LLVMModuleRef mod,
             LLVMBuilderRef builder,
             LLVMValueRef main) {
-  
+
   LLVMBasicBlockRef whileBlock = LLVMAppendBasicBlock(main, "while");
   LLVMBuildBr(builder, whileBlock);
-  
+
   LLVMPositionBuilderAtEnd(builder, whileBlock);
   LLVMValueRef pPtrPtrValue = LLVMGetNamedGlobal(mod, "p");
   LLVMValueRef pPtrValue = LLVMBuildLoad(builder, pPtrPtrValue, "");
   LLVMValueRef pValue = LLVMBuildLoad(builder, pPtrValue, "");
-  
+
   LLVMValueRef cmpResult = LLVMBuildICmp(builder,
                                          LLVMIntNE,
                                          pValue,
@@ -308,21 +308,21 @@ size_t whilep(const char *source,
                                                       0,
                                                       false),
                                          "");
-  
+
   LLVMBasicBlockRef thenBlock = LLVMAppendBasicBlock(main, "then");
   LLVMBasicBlockRef elseBlock = LLVMAppendBasicBlock(main, "else");
-  
+
   LLVMBuildCondBr(builder, cmpResult, thenBlock, elseBlock);
-  
+
   LLVMPositionBuilderAtEnd(builder, thenBlock);
-  
+
   // emit more code... (maybe recurse here)
   // LLVMBuildStuff()
   size_t advance_by = build_cfg(source, mod, builder, main);
   // TODO: wire up return value of build_cfg to elseBlock
-  
+
   LLVMBuildBr(builder, whileBlock);
-  
+
   LLVMPositionBuilderAtEnd(builder, elseBlock);
   return advance_by;
 }
@@ -332,7 +332,7 @@ size_t build_cfg(const char *source,
                LLVMBuilderRef builder,
                LLVMValueRef main) {
   size_t start_of_while = 0;
-  
+
   for (size_t i = 0; i < strlen(source); i++) {
     switch (source[i]) {
       // ignore whitespace
@@ -370,7 +370,7 @@ size_t build_cfg(const char *source,
         printf("Unknown instruction: '%c'", source[i]);
         break;
     }
-    
+
     // Print memory
 //    LLVMValueRef printArrayFn = LLVMGetNamedFunction(mod, "print_array");
 //    LLVMValueRef memoryPtrPtr = LLVMGetNamedGlobal(mod, "memory");
