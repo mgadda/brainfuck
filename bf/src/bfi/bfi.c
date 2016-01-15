@@ -28,12 +28,11 @@ OR
 
 */
 
-// fopen, putchar, fread
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
-#include <stdint.h>
 
 #define CHUNK_SIZE 100
 
@@ -55,13 +54,10 @@ int main(int argc, char const *argv[]) {
 
   free(source);
   fclose(file);
-  // read file from argv[1]
-  // map each character to x86 instructions
-  // write to argv[2]
   return 0;
 }
 
-// Create 1k buffer and read null-terminated source into it
+// Alocate 1k buffer and read null-terminated source into it
 char *load_file(FILE *file) {
   char *source = calloc(1024, 1);
   size_t bytes_read = fread(source, 1, 1024 - 1, file);

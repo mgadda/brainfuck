@@ -29,25 +29,21 @@ OR
 
 */
 
-// fopen, putchar, fread
+#include <errno.h>
+#include <libgen.h>
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <errno.h>
 #include <string.h>
-#include <libgen.h>
 
 #include <llvm-c/Core.h>
 #include <llvm-c/Analysis.h>
 #include <llvm-c/BitWriter.h>
-
-
 #include <llvm/IR/Constants.h>
 
 #define CHUNK_SIZE 100
-
 
 enum Direction {
   Increment = 1,
@@ -236,7 +232,6 @@ void setup_externals(LLVMModuleRef module) {
   
 }
 
-// Increment %p
 void incdecp(LLVMModuleRef module, LLVMBuilderRef builder, Direction dir) {
   LLVMValueRef pPtrPtrValue = LLVMGetNamedGlobal(module, "p");
   
@@ -250,8 +245,6 @@ void incdecp(LLVMModuleRef module, LLVMBuilderRef builder, Direction dir) {
   LLVMBuildStore(builder, i2, pPtrPtrValue);
 }
 
-
-// Decrement *%p
 void incdecv(LLVMModuleRef module, LLVMBuilderRef builder, Direction dir) {
 
   LLVMValueRef pPtrPtrValue = LLVMGetNamedGlobal(module, "p");
